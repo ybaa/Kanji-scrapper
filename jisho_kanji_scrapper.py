@@ -58,6 +58,9 @@ def main():
 
                 kanji_field_content += this_kanji + "<br>" + this_meaning + "<br>" + on_reading + "<br>" + kun_reading + "<br><hr>"
 
+            if kanji_field_content == '':   # to not check kana words every time
+                kanji_field_content = ' '   
+
             note['fields']['Kanji']['value'] = kanji_field_content
             
             post_note_fields = dict()

@@ -39,6 +39,10 @@ def main():
         if note['fields']['audio']['value'] == '':
             word = note['fields']['word']['value']
             kana = ''.join(re.findall('\[(.*?)\]', note['fields']['word with furigana']['value']))
+            kana_ending = re.findall('\](?:.(?!\]))+$', note['fields']['word with furigana']['value'])   # fill hiragana after kanji
+            if len(kana_ending) > 0:
+                kana += kana_ending[0][1:]
+            
             audio_name = 'audio_%s_%s.mp3' % (kana, word)
 
             audio_url = 'http://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kana=%s&kanji=%s' % (kana, word) 
